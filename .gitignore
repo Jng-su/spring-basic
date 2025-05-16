@@ -1,0 +1,34 @@
+# Java build
+/target/
+*.class
+
+# Logs
+*.log
+spring.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Maven & Gradle
+/.mvn/
+!**/src/main/resources/
+/build/
+.gradle/
+**/build/
+
+# Environment files
+.env
+*.env
+
+# Others
+*.jar
+*.war
+*.ear

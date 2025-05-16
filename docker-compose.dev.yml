@@ -1,0 +1,36 @@
+services:
+  spring-basic-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    env_file:
+      - .env.development
+    depends_on:
+      spring-basic-database:
+        condition: service_healthy
+    networks:
+      - spring-basic-network
+  spring-basic-database:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env.development
+    volumes:
+      - data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - spring-basic-network
+networks:
+  spring-basic-network:
+    driver: bridge
+volumes:
+  data:
